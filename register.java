@@ -121,13 +121,10 @@ public class register implements ActionListener {
         st.setString(4, name);
         st.setString(5, status);
         */
-       int x =  st.executeUpdate(quory);
+        st.executeUpdate(quory);
+        con.close();
+        st.close();
        
-       if (x==0){
-           JOptionPane.showMessageDialog(root, "This user already exists", "status", JOptionPane.ERROR_MESSAGE);
-
-       }
-       else{
            JOptionPane.showMessageDialog(root, "User is registered");
            i_t.setText("");
            u_t.setText("");
@@ -136,10 +133,6 @@ public class register implements ActionListener {
            
        }
 
-       
-
-    }
-    
 
 @Override
 public void actionPerformed (ActionEvent e){

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
 public class booking implements ActionListener {
     JButton check_out,cancle;
     JTextField F_T,L_T,E_T,P_T,flig_T ,no_T;
@@ -104,21 +105,42 @@ public class booking implements ActionListener {
         booking.setVisible(true);
         
     }
-    void conform(){
+    void conform() throws Exception{
+        String full_name = F_T.getText()+" "+L_T.getText();
+        String quory = "insert into booking values('"+Integer.parseInt(P_T.getText())+"','"+full_name+"','"+E_T.getText()+"','"
+        +flig_T.getText()+"','"+Integer.parseInt(no_T.getText())+"')";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pasengers","root","Phe6@nol");
+        Statement st = con.createStatement();
+        st.executeUpdate(quory);
+        con.close();
+        st.close();
+
         JOptionPane.showMessageDialog(booking, "Reservation is confirm", "Ticket status", JOptionPane.PLAIN_MESSAGE );
     }
+
+    
     
     @Override
     public void actionPerformed(ActionEvent e){
        if(e.getSource()==check_out){
+        try{
          conform(); 
+
         F_T.setText("");
         E_T.setText("");
         no_T.setText("");
         flig_T.setText("");
         L_T.setText("");
         P_T.setText("");
+        }catch(Exception m){
+            JOptionPane.showMessageDialog(booking, "Some thing went wrong","status",JOptionPane.ERROR_MESSAGE);
+        }
        }
        
+       
+    }
+    public static Object getSize() {
+        return null;
     }
 }

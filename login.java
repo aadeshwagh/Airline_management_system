@@ -101,12 +101,15 @@ public class login implements ActionListener{
         st.setString(2 ,passw);
         st.setString(3 ,c.getItem(c.getSelectedIndex()));
         ResultSet rs = st.executeQuery();
+        
 
         if(rs.next()){
             new main_frame();
                 
             root.dispose();
+            
         }
+        
         else{
             JOptionPane.showMessageDialog(login, "Incorrect password/username", "Login status", JOptionPane.ERROR_MESSAGE) ;
         }
@@ -135,7 +138,7 @@ public class login implements ActionListener{
             try{
             check();
             }catch(Exception k){
-                k.printStackTrace();
+                JOptionPane.showMessageDialog(login, "Somthing went wrong", "Database error", JOptionPane.ERROR_MESSAGE) ;
             }
             
         }
