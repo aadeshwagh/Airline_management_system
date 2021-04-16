@@ -3,7 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 public class booking implements ActionListener {
     JButton check_out,cancle;
-    JTextField F_T,L_T,E_T,P_T,flig_T;
+    JTextField F_T,L_T,E_T,P_T,flig_T ,no_T;
+    JFrame booking;
     booking(){
         //Labels
         JLabel F_name = new JLabel("First name :");
@@ -11,12 +12,14 @@ public class booking implements ActionListener {
         JLabel E_mail = new JLabel("Email ID :");
         JLabel P_mr = new JLabel("PMR number :");
         JLabel flight = new JLabel("Flight number:");
+        JLabel no = new JLabel("Pssengers :");
 
         F_name.setFont(new Font("san-sarif" , Font.PLAIN ,18));
         L_name.setFont(new Font("san-sarif" , Font.PLAIN ,18));
         E_mail.setFont(new Font("san-sarif" , Font.PLAIN ,18));
         P_mr.setFont(new Font("san-sarif" , Font.PLAIN ,18));
         flight.setFont(new Font("san-sarif" , Font.PLAIN ,18));
+        no.setFont(new Font("san-sarif" , Font.PLAIN ,18));
         
         //text field
         F_T = new JTextField();
@@ -24,15 +27,17 @@ public class booking implements ActionListener {
         E_T = new JTextField();
         P_T = new JTextField();
         flig_T = new JTextField();
+        no_T = new JTextField();
 
         F_T.setFont(new Font("san-sarif",Font.PLAIN,17));
         L_T.setFont(new Font("san-sarif",Font.PLAIN,17));
         E_T.setFont(new Font("san-sarif",Font.PLAIN,17));
         P_T.setFont(new Font("san-sarif",Font.PLAIN,17));
         flig_T.setFont(new Font("san-sarif",Font.PLAIN,17));
+        no_T.setFont(new Font("san-sarif",Font.PLAIN,17));
 
         //button
-        check_out = new JButton("Check out");
+        check_out = new JButton("Proceed");
         check_out.setFocusable(false);
         check_out.setFont(new Font("san-sarif",Font.PLAIN ,18));
         check_out.addActionListener(this);
@@ -43,7 +48,7 @@ public class booking implements ActionListener {
         cancle.setFont(new Font("san-sarif",Font.PLAIN ,18));
         
         //window
-        JFrame booking = new JFrame("Ticket reservation");
+         booking = new JFrame("Ticket reservation");
         booking.setSize(540,500);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         booking.setLocation(dim.width/2-booking.getSize().width/2, dim.height/2-booking.getSize().height/2);
@@ -57,6 +62,7 @@ public class booking implements ActionListener {
         booking.add(E_mail);
         booking.add(P_mr);
         booking.add(flight);
+        booking.add(no);
 
         //add textfields
         booking.add(F_T);
@@ -64,6 +70,7 @@ public class booking implements ActionListener {
         booking.add(E_T);
         booking.add(P_T);
         booking.add(flig_T);
+        booking.add(no_T);
 
         //add buttons
         booking.add(check_out);
@@ -77,6 +84,7 @@ public class booking implements ActionListener {
         E_mail.setBounds(30, 140, 100, 19);
         P_mr.setBounds(30, 200, 120, 19);
         flight.setBounds(30 ,260 ,120 ,20);
+        no.setBounds(30,320 ,100 ,20);
 
         //bounds textfields
         F_T.setBounds(180, 20, 230, 30);
@@ -84,10 +92,11 @@ public class booking implements ActionListener {
         E_T.setBounds(180, 140, 230, 30);
         P_T.setBounds(180, 200, 230, 30);
         flig_T.setBounds(180,260,230,30);
+        no_T.setBounds(180 ,320 ,230 ,30);
 
        //bounds button
-       check_out.setBounds(150,350, 120 ,40);
-       cancle.setBounds(280,350, 120 ,40);
+       check_out.setBounds(150,380, 120 ,40);
+       cancle.setBounds(280,380, 120 ,40);
 
 
 
@@ -95,9 +104,21 @@ public class booking implements ActionListener {
         booking.setVisible(true);
         
     }
+    void conform(){
+        JOptionPane.showMessageDialog(booking, "Reservation is confirm", "Ticket status", JOptionPane.PLAIN_MESSAGE );
+    }
     
     @Override
     public void actionPerformed(ActionEvent e){
+       if(e.getSource()==check_out){
+         conform(); 
+        F_T.setText("");
+        E_T.setText("");
+        no_T.setText("");
+        flig_T.setText("");
+        L_T.setText("");
+        P_T.setText("");
+       }
        
     }
 }

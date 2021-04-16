@@ -9,7 +9,7 @@ public class welcome_window implements ActionListener{
         
         //Labels
         JLabel name = new JLabel();
-        name.setText("WELCOME TO AIR ASIA");
+        name.setText("WELCOME TO AIR INDIA");
         name.setFont(new Font(name.getName(),Font.PLAIN, 40));
         
         JLabel info = new JLabel();
@@ -64,8 +64,11 @@ public class welcome_window implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==login){
-            new main_frame();
-            root.dispose();
+            new login();
+            
+        }
+        if(e.getSource()==reg){
+            new register();
         }
     }
 }
