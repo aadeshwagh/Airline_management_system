@@ -11,7 +11,7 @@ public class booking implements ActionListener {
         JLabel F_name = new JLabel("First name :");
         JLabel L_name = new JLabel("Last name :");
         JLabel E_mail = new JLabel("Email ID :");
-        JLabel P_mr = new JLabel("PMR number :");
+        JLabel P_mr = new JLabel("PNR number :");
         JLabel flight = new JLabel("Flight number:");
         JLabel no = new JLabel("Pssengers :");
 

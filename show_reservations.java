@@ -3,13 +3,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import net.proteanit.sql.DbUtils;
-public class Flight_info implements ActionListener{
+public class show_reservations implements ActionListener {
     JFrame root;
-    JTextField src_T,desti_T;
+    JTextField pnr_T;
     JButton display,displayAll;
     JTable table; 
-    Flight_info(){
-
+    show_reservations(){
+        
         //Jtable
        
         table = new JTable();
@@ -20,33 +20,33 @@ public class Flight_info implements ActionListener{
         
 
         //labels
-        JLabel src = new JLabel("Source :");
-        JLabel desti = new JLabel("Destination:");
+        JLabel pnr = new JLabel("PNR NO :");
+        
 
-        src.setFont(new Font("san-sarif" , Font.PLAIN ,18));
-        desti.setFont(new Font("san-sarif" , Font.PLAIN ,18));
+        pnr.setFont(new Font("san-sarif" , Font.PLAIN ,18));
+        
 
         //text fields
-        src_T = new JTextField();
-        desti_T = new JTextField();
+        pnr_T = new JTextField();
+       
 
-        src_T.setFont(new Font("san-sarif",Font.PLAIN,17));
-        desti_T.setFont(new Font("san-sarif",Font.PLAIN,17));
+        pnr_T.setFont(new Font("san-sarif",Font.PLAIN,17));
+        
 
 
         //buttons
-        display = new JButton("display");
+        display = new JButton("Display");
         display.setFocusable(false);
         display.setFont(new Font("san-sarif",Font.PLAIN ,18));
         display.addActionListener(this);
 
-        displayAll = new JButton("All Flights");
+        displayAll = new JButton("Display all");
         displayAll.setFocusable(false);
         displayAll.addActionListener(this);
         displayAll.setFont(new Font("san-sarif",Font.PLAIN ,18));
 
         //main window
-        root = new JFrame("Flights information");
+        root = new JFrame("Passenger reservations");
         root.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         root.setSize(600,500);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -55,51 +55,29 @@ public class Flight_info implements ActionListener{
         root.setResizable(false);
        
         //add
-        root.add(src);
-        root.add(desti);
-        root.add(src_T);
-        root.add(desti_T);
+        root.add(pnr);
+        root.add(pnr_T);
         root.add(display);
         root.add(displayAll);
         root.add(table);
         root.add(sp);
 
         //set bounds
-        src.setBounds(10,30,100,19);
-        src_T.setBounds(120,30,130,30);
-        desti.setBounds(270,30,110,19);
-        desti_T.setBounds(390,30,130,30);
-        display.setBounds(150,70,110,30);
-        displayAll.setBounds(265,70,110,30);
+        pnr.setBounds(10,30,100,19);
+        pnr_T.setBounds(120,30,200,30);
+        display.setBounds(130,70,130,30);
+        displayAll.setBounds(265,70,130,30);
         table.setBounds(10, 130, 560, 400);
 
 
         root.setVisible(true);
-
-
     }
 
-    
-    void show_data(String src , String desti)throws Exception{
-        String url = "jdbc:mysql://localhost:3306/pasengers";
-        String uname = "root";
-        String pass = "Phe6@nol";
-        String query = "SELECT * FROM flights WHERE src = ? AND desti = ?";
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con  = DriverManager.getConnection(url , uname ,pass);
-        PreparedStatement st = con.prepareStatement(query);
-        st.setString(1,src);
-        st.setString(2 ,desti);
-        ResultSet rs = st.executeQuery();
-        table.setModel(DbUtils.resultSetToTableModel(rs));
-
-
-    }
     void show_data()throws Exception{
         String url = "jdbc:mysql://localhost:3306/pasengers";
         String uname = "root";
         String pass = "Phe6@nol";
-        String query = "SELECT * FROM flights";
+        String query = "SELECT * FROM booking";
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con  = DriverManager.getConnection(url , uname ,pass);
         PreparedStatement st = con.prepareStatement(query);
@@ -107,22 +85,34 @@ public class Flight_info implements ActionListener{
         table.setModel(DbUtils.resultSetToTableModel(rs));
 
     }
+    void show_data(String pnr_no)throws Exception{
+        String url = "jdbc:mysql://localhost:3306/pasengers";
+        String uname = "root";
+        String pass = "Phe6@nol";
+        String query = "SELECT * FROM booking where id=?";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con  = DriverManager.getConnection(url , uname ,pass);
+        PreparedStatement st = con.prepareStatement(query);
+        st.setString(1, pnr_no);
+        ResultSet rs = st.executeQuery();
+        table.setModel(DbUtils.resultSetToTableModel(rs));
 
-    @Override
-    public void actionPerformed(ActionEvent e){
-       if(e.getSource()==display){
-           try {
-               show_data(src_T.getText(), desti_T.getText());
-           } catch (Exception p) {
-               System.out.println("Wrong");
-           }
-       }
-       if(e.getSource()==displayAll){
-        try {
-            show_data();
-        } catch (Exception p) {
-            System.out.println("Wrong");
-        }
     }
+
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource()==display){
+            try {
+                show_data(pnr_T.getText());
+            } catch (Exception p) {
+                System.out.println("Wrong");
+            }
+        }
+        if(e.getSource()==displayAll){
+            try {
+                show_data();
+            } catch (Exception p) {
+                System.out.println("Wrong");
+            }
+        }
     }
 }

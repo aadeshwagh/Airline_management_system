@@ -104,10 +104,17 @@ public class login implements ActionListener{
         
 
         if(rs.next()){
-            new main_frame();
-                
-            root.dispose();
-            
+            if(c.getItem(c.getSelectedIndex()).equals("Staff")){
+                new staff_window();
+            }
+            else if(c.getItem(c.getSelectedIndex()).equals("Passenger")){
+                new main_frame();
+            }
+            else{
+                JOptionPane.showMessageDialog(login, "Incorrect status", "Login status", JOptionPane.ERROR_MESSAGE) ;
+            }
+              
+            root.dispose();    
         }
         
         else{
