@@ -1,5 +1,6 @@
 # Airline_management_system
-###This is a Airline management application developed using java , swing for user interface and mysql database for datastorege
+This is a Airline management application developed using java , swing for user interface and mysql database for datastorege
+App has functionalities for passengers as well as for staff members.
 ## Interface
 <img src="imgs/ams1.PNG" >
 <img src="imgs/ams2.PNG" >
