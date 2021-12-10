@@ -1,6 +1,9 @@
 # Airline_management_system
-<img src="images/Capture.PNG" >
-<img src="images/Capture1.PNG" >
-<img src="images/Capture2.PNG" >
-<img src="images/Capture3.PNG" >
-<img src="images/Capture4.PNG" >
+###This is a Airline management application developed using java , swing for user interface and mysql database for datastorege
+## Interface
+<img src="imgs/ams1.PNG" >
+<img src="imgs/ams2.PNG" >
+<img src="imgs/ams3.PNG" >
+<img src="imgs/ams4.PNG" >
+<img src="imgs/ams5.PNG" >
+<img src="imgs/ams6.PNG" >
